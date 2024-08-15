@@ -21,7 +21,7 @@ struct sockaddr_in {
     sin_zero: [u8; 8],
 }
 
-#[tracepoint(name = "sys_enter_connect" , category = "syscall")]
+#[tracepoint(name = "sys_enter_connect" , category = "syscalls")]
 pub fn sys_enter_connect(ctx: TracePointContext) -> u32 {
     match unsafe { try_sys_enter_connect(&ctx) } {
         Ok(ret) => ret,
