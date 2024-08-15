@@ -34,7 +34,7 @@ async fn main() -> Result<(), anyhow::Error> {
     program.load()?;
     program.attach("syscalls", "sys_enter_connect")?;
 
-    let mut perf_array = AsyncPerfEventArray::try_from(bpf.map("EVENTS").unwrap())?;
+    let mut perf_array = AsyncPerfEventArray::try_from(bpf.take_map("EVENTS").unwrap())?;
 
     for cpu_id in online_cpus()? {
         let mut buf = perf_array.open(cpu_id, None)?;
